@@ -1,0 +1,102 @@
+{% extends "stamper.html" %}
+
+{% block css %}
+{% include "master/css.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        <a href="{% url "command_issued" %}" class="btn btn-sm btn-success create-btn">命令下发</a>
+{#                        <div class="btn btn-sm btn-success createlog-btn">初始化主机</div>#}
+                    </h3>
+                    <form action="" method="get" class="pull-right">
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover text-center">
+                        <tr class="text-center">
+                            <th>序号</th>
+                            <th>命令</th>
+                            <th>主机</th>
+                            <th>执行人</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+
+                        </tr>
+                        {% for i in command %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ i.command}}</td>
+                                <td>{{ i.hosts_list }}</td>
+                                <td>{{ i.user }}</td>
+                                <td>{{ i.create_time|date:"Y-m-d h:i:s" }}</td>
+                                <td>
+                                    <div href="#" data-url="{% url 'command_details' i.pk %}" class="btn btn-sm btn-primary det-btn">详情</div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div>
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    {{ page_html|safe }}
+                </ul>
+                <!-- /.box -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $("#bt").removeClass("hidden")
+        $("#command").addClass("active")
+        $("#command_list").addClass("active")
+{#        $(".create-btn").on("click", function () {#}
+{#            ui.box({#}
+{#                "title": "添加初始化",#}
+{#                "remote": "{% url 'command_issued' %}"#}
+{#            })#}
+{#        })#}
+        $(".det-btn").on("click", function () {
+            ui.box({
+                "title": "命令详情",
+                "remote": $(this).attr('data-url')
+            })
+        })
+{#        $(".del-btn").on("click", function (e) {#}
+{#            e.preventDefault(); //取消原来的动作#}
+{#            var url=$(this).attr('data-url')#}
+{#            ui.confirm("你确认要删除吗?",function () {#}
+{#                console.log($(this))#}
+{#                Net.get({#}
+{#                    url:url,#}
+{#                    reload:true#}
+{#                })#}
+{#            })#}
+{#        })#}
+    </script>
+{% endblock %}

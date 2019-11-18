@@ -1,0 +1,128 @@
+{% extends "stamper.html" %}
+
+{% block css %}
+{% include "master/css.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                         <div class="btn btn-sm btn-success create-btn">新增</div>
+                    </h3>
+                    <form action="" method="get" class="pull-right">
+
+                    <div class="box-tools">
+
+                        <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+
+                            <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                        </div>
+                    </div>
+                        </form>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th>Email</th>
+                            <th>角色</th>
+                            <th>部门</th>
+                            <th>状态</th>
+                            <th>电话</th>
+                            <th>时间</th>
+                            <th>操作</th>
+
+
+                        </tr>
+                        {% for user in users %}
+                            <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.get_role_display }}</td>
+{#        |前端过滤器  （将数据再处理）    default_if_none:"" 如果默认为none则显示""（空）                    #}
+                                <td>{{ user.department|default_if_none:"" }}</td>
+                            <td>{{ user.get_status_display }}</td>
+                            <td>{{ user.phone|default_if_none:"" }}</td>
+{#         过滤器重新定义时间格式                       #}
+                            <td>{{ user.create_time|date:"Y-m-d h:i:s" }}</td>
+                            <td>
+                                <div data-url="{% url 'edit_user' user.pk %}"
+                                         class="btn btn-sm btn-success edit-btn">编辑
+                                    </div>
+                                    <div href="#" data-url="{% url 'del_user' user.pk %}" class="btn btn-sm btn-danger del-btn">删除</div>
+                            </td>
+
+
+                        </tr>
+                        {% endfor %}
+                        
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        <div>
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    {{ page_html|safe }}
+                </ul>
+                <!-- /.box -->
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+    $("#bt").removeClass("hidden")
+    $("#user").addClass("active")
+    $("#user_list").addClass("active")
+    $(".create-btn").on("click", function () {
+            ui.box({
+                "title": "添加用户",
+                "remote": "{% url 'create_user' %}"
+            })
+        })
+    $(".edit-btn").on("click", function () {
+            ui.box({
+                "title": "编辑用户",
+{#  获取data-url数据              #}
+                "remote": $(this).attr('data-url')
+            })
+        })
+    $(".del-btn").on("click", function () {
+            var url=$(this).attr('data-url')
+{#            console.log(this);#}
+            ui.confirm("你确认要删除吗?",function () {
+                console.log($(this))
+                Net.get({
+                    url:url,
+{#                    重新加载页面#}
+                    reload:true
+                })
+            })
+        })
+</script>
+
+
+{% endblock %}

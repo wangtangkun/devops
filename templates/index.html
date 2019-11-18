@@ -1,0 +1,434 @@
+{% extends 'stamper.html' %}
+{% block css %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="row state-overview">
+<div class="col-lg-3 col-sm-6">
+<section class="panel">
+<div class="symbol">
+<i class="fa fa-tags blue">
+</i>
+</div>
+<div class="value">
+<h1 class="count">495</h1>
+<p>
+Total Sale
+</p>
+</div>
+</section>
+</div>
+<div class="col-lg-3 col-sm-6">
+<section class="panel">
+<div class="symbol">
+<i class="fa fa-money red">
+</i>
+</div>
+<div class="value">
+<h1 class=" count2">947</h1>
+<p>
+Total Profit
+</p>
+</div>
+</section>
+</div>
+<div class="col-lg-3 col-sm-6">
+<section class="panel">
+<div class="symbol">
+<i class="fa fa-user yellow">
+</i>
+</div>
+<div class="value">
+<h1 class=" count3">328</h1>
+<p>
+New Users
+</p>
+</div>
+</section>
+</div>
+<div class="col-lg-3 col-sm-6">
+<section class="panel">
+<div class="symbol">
+<i class="fa fa-shopping-cart purple">
+</i>
+</div>
+<div class="value">
+<h1 class=" count4">10328</h1>
+<p>
+New Orders
+</p>
+</div>
+</section>
+</div>
+</div>
+
+<div id="morris">
+
+<div class="row">
+<div class="col-lg-4">
+<div class="panel terques-chart">
+<div class="panel-body chart-texture">
+<div class="chart">
+<div class="heading">
+<span>
+Friday
+</span>
+<strong>
+$ 657,00 | 55%
+</strong>
+</div>
+<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[564,123,890,564,455,200,135,667,333,526,996]"><canvas width="346" height="75" style="display: inline-block; width: 346px; height: 75px; vertical-align: top;"></canvas></div>
+</div>
+</div>
+<div class="chart-tittle">
+<span class="title">
+New Earning
+</span>
+<span class="value">
+<a href="#" class="active">
+Market
+</a>
+|
+<a href="#">
+Local
+</a>
+|
+<a href="#">
+Online
+</a>
+</span>
+</div>
+</div>
+<div class="panel green-chart">
+<div class="panel-body">
+<div class="chart">
+<div class="heading">
+<span>
+June
+</span>
+<strong>
+23 Days | 65%
+</strong>
+</div>
+<div id="designchart"><canvas width="265" height="65" style="display: inline-block; width: 265px; height: 65px; vertical-align: top;"></canvas></div>
+</div>
+</div>
+<div class="chart-tittle">
+<span class="title">
+Total Earn
+</span>
+<span class="value">
+$, 50,23,561
+</span>
+</div>
+</div>
+</div>
+<div class="col-lg-2">
+<div class="tiles facebook-tile text-center">
+<i class="fa fa-facebook icon-lg-size">
+</i>
+<h4>
+<a href="#fakelink">
+10K likes
+</a>
+</h4>
+</div>
+
+<div class="tiles twitter-tile text-center">
+<i class="fa fa-twitter icon-lg-size">
+</i>
+<h4>
+<a href="#fakelink">
+2K followers
+</a>
+</h4>
+</div>
+
+</div>
+<div class="col-lg-6">
+<section class="panel">
+<header class="panel-heading">
+Profit(USD)
+</header>
+<div class="panel-body">
+<div id="hero-area" class="graph" style="position: relative;">
+<div class="morris-hover morris-default-style" style="display: none;"></div></div>
+</div>
+</section>
+</div>
+</div>
+
+</div>
+
+<div class="row">
+<div class="col-lg-8">
+<section class="panel">
+<div class="panel-body">
+<a href="#" class="task-thumb">
+<img src="/static/img/avatar1.jpg" alt="">
+</a>
+<div class="task-thumb-details">
+<h1>
+<a href="#">
+Work Progress
+</a>
+</h1>
+<p>
+Pruthvi Bardolia
+</p>
+</div>
+</div>
+<table class="table table-hover personal-task">
+<tbody>
+<tr>
+<td>
+1
+</td>
+<td>
+Target Revenue
+</td>
+<td>
+<span class="badge bg-important">
+75%
+</span>
+</td>
+<td>
+<div id="work-progress1"><canvas width="47" height="20" style="display: inline-block; width: 47px; height: 20px; vertical-align: top;"></canvas></div>
+ </td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+Project Larsen
+</td>
+<td>
+<span class="badge bg-success">
+43%
+</span>
+</td>
+<td>
+<div id="work-progress2"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+Project Nowbie
+</td>
+<td>
+<span class="badge bg-info">
+67%
+</span>
+</td>
+<td>
+<div id="work-progress3"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+Total Sales
+</td>
+<td>
+<span class="badge bg-warning">
+30%
+</span>
+</td>
+<td>
+<div id="work-progress4"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+Delivery Pending
+</td>
+<td>
+<span class="badge bg-primary">
+15%
+</span>
+</td>
+<td>
+<div id="work-progress5"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<div class="col-lg-4">
+<section class="panel post-wrap pro-box">
+<aside>
+<div class="post-info">
+<div class="panel-body">
+<footer class="social-footer">
+<ul>
+<li class="active">
+<a href="#">
+<i class="fa fa-twitter">
+</i>
+</a>
+</li>
+</ul>
+</footer>
+
+<div class="text-center twite">
+<h1>
+We just Launch a New Theme Check it Out at
+<a href="javascript:;">
+http://olivethemes.in/
+</a>
+</h1>
+<p>
+4 Days ago
+</p>
+</div>
+</div>
+</div>
+</aside>
+</section>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-lg-6">
+<div class="panel">
+<div class="panel-body">
+<div class="media usr-info">
+<a href="#" class="pull-left">
+<img class="thumb" src="/static/img/avatar1.jpg" alt="">
+</a>
+<div class="media-body">
+<h4 class="media-heading">
+ Pruthvi Bardolia
+</h4>
+<span>
+Chief-Sarathi
+</span>
+<p>
+I handcraft beautiful websites and application for all kind of devices
+</p>
+</div>
+</div>
+</div>
+</div>
+<section class="panel">
+<div class="weather-bg">
+<div class="panel-body">
+<div class="row">
+<div class="col-xs-6">
+<i class="fa fa-cloud">
+</i>
+New Delhi
+</div>
+<div class="col-xs-6">
+<div class="degree">
+48°
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="weather-category">
+<ul>
+<li class="active">
+<h5>
+humidity
+</h5>
+45%
+</li>
+<li>
+<h5>
+winds
+</h5>
+5 mph
+</li>
+</ul>
+</footer>
+
+</section>
+</div>
+<div class="col-lg-6">
+<div class="panel">
+<div class="panel-body">
+<div class="calendar-block ">
+<div class="cal1"><div class="clndr"><div class="clndr-controls"><div class="clndr-control-button"><span class="clndr-previous-button"><i class="fa fa-chevron-left"></i></span></div><div class="month"><span>October</span> 2019</div><div class="clndr-control-button leftalign"><span class="clndr-next-button"><i class="fa fa-chevron-right"></i></span></div></div><table class="clndr-table" border="0" cellspacing="0" cellpadding="0"><thead><tr class="header-days"><td class="header-day">S</td><td class="header-day">M</td><td class="header-day">T</td><td class="header-day">W</td><td class="header-day">T</td><td class="header-day">F</td><td class="header-day">S</td></tr></thead><tbody><tr><td class="day past adjacent-month last-month calendar-day-2019-09-29"><div class="day-contents">29</div></td><td class="day past adjacent-month last-month calendar-day-2019-09-30"><div class="day-contents">30</div></td><td class="day past calendar-day-2019-10-01"><div class="day-contents">1</div></td><td class="day past calendar-day-2019-10-02"><div class="day-contents">2</div></td><td class="day past calendar-day-2019-10-03"><div class="day-contents">3</div></td><td class="day past calendar-day-2019-10-04"><div class="day-contents">4</div></td><td class="day past calendar-day-2019-10-05"><div class="day-contents">5</div></td></tr><tr><td class="day past calendar-day-2019-10-06"><div class="day-contents">6</div></td><td class="day past calendar-day-2019-10-07"><div class="day-contents">7</div></td><td class="day today calendar-day-2019-10-08"><div class="day-contents">8</div></td><td class="day calendar-day-2019-10-09"><div class="day-contents">9</div></td><td class="day event calendar-day-2019-10-10"><div class="day-contents">10</div></td><td class="day event calendar-day-2019-10-11"><div class="day-contents">11</div></td><td class="day event calendar-day-2019-10-12"><div class="day-contents">12</div></td></tr><tr><td class="day event calendar-day-2019-10-13"><div class="day-contents">13</div></td><td class="day event calendar-day-2019-10-14"><div class="day-contents">14</div></td><td class="day calendar-day-2019-10-15"><div class="day-contents">15</div></td><td class="day calendar-day-2019-10-16"><div class="day-contents">16</div></td><td class="day calendar-day-2019-10-17"><div class="day-contents">17</div></td><td class="day calendar-day-2019-10-18"><div class="day-contents">18</div></td><td class="day calendar-day-2019-10-19"><div class="day-contents">19</div></td></tr><tr><td class="day calendar-day-2019-10-20"><div class="day-contents">20</div></td><td class="day event calendar-day-2019-10-21"><div class="day-contents">21</div></td><td class="day event calendar-day-2019-10-22"><div class="day-contents">22</div></td><td class="day event calendar-day-2019-10-23"><div class="day-contents">23</div></td><td class="day calendar-day-2019-10-24"><div class="day-contents">24</div></td><td class="day calendar-day-2019-10-25"><div class="day-contents">25</div></td><td class="day calendar-day-2019-10-26"><div class="day-contents">26</div></td></tr><tr><td class="day calendar-day-2019-10-27"><div class="day-contents">27</div></td><td class="day calendar-day-2019-10-28"><div class="day-contents">28</div></td><td class="day calendar-day-2019-10-29"><div class="day-contents">29</div></td><td class="day calendar-day-2019-10-30"><div class="day-contents">30</div></td><td class="day calendar-day-2019-10-31"><div class="day-contents">31</div></td><td class="day adjacent-month next-month calendar-day-2019-11-01"><div class="day-contents">1</div></td><td class="day adjacent-month next-month calendar-day-2019-11-02"><div class="day-contents">2</div></td></tr></tbody></table></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-lg-6">
+<div class="panel">
+<div class="panel-body">
+<footer class="project-category">
+<ul>
+<li class="active">
+<h5>
+Project 1
+</h5>
+<div id="work-progress6"><canvas width="68" height="30" style="display: inline-block; width: 68px; height: 30px; vertical-align: top;"></canvas></div>
+</li>
+<li>
+<h5>
+Project 2
+</h5>
+<div id="work-progress7"><canvas width="68" height="30" style="display: inline-block; width: 68px; height: 30px; vertical-align: top;"></canvas></div>
+</li>
+<li>
+<h5>
+Project 3
+</h5>
+<div id="work-progress8"><canvas width="68" height="30" style="display: inline-block; width: 68px; height: 30px; vertical-align: top;"></canvas></div>
+</li>
+</ul>
+<h1>
+Projects accomplished
+</h1>
+</footer>
+
+</div>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="panel">
+<div class="panel-body">
+<div class="bio-chart">
+<div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="78" data-fgcolor="#f9a3a3" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; background: none; font: bold 20px Arial; text-align: center; color: rgb(249, 163, 163); padding: 0px; -webkit-appearance: none;"></div>
+<h4 class="red">
+Profit
+</h4>
+</div>
+<div class="bio-chart">
+<div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="63" data-fgcolor="#fcce54" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; background: none; font: bold 20px Arial; text-align: center; color: rgb(252, 206, 84); padding: 0px; -webkit-appearance: none;"></div>
+<h4 class="yellow">
+Expansion
+</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    {% include "yw.html" %}
+{% endblock %}
+
+
+
+{% block js %}
+
+{% endblock %}

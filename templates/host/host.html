@@ -1,0 +1,105 @@
+{% extends "stamper.html" %}
+
+{% block css %}
+{% include "master/css.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                         <div class="btn btn-sm btn-success create-btn">点击</div>
+                    </h3>
+
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Reason</th>
+                        </tr>
+                        <tr>
+                            <td>183</td>
+                            <td>John Doe</td>
+                            <td>11-7-2014</td>
+                            <td><span class="label label-success">Approved</span></td>
+                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                        <tr>
+                            <td>219</td>
+                            <td>Alexander Pierce</td>
+                            <td>11-7-2014</td>
+                            <td><span class="label label-warning">Pending</span></td>
+                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                        <tr>
+                            <td>657</td>
+                            <td>Bob Doe</td>
+                            <td>11-7-2014</td>
+                            <td><span class="label label-primary">Approved</span></td>
+                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                        <tr>
+                            <td>175</td>
+                            <td>Mike Doe</td>
+                            <td>11-7-2014</td>
+                            <td><span class="label label-danger">Denied</span></td>
+                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+
+    <section class="content-header">
+    <h1>
+        {{ page_title }}
+    </h1>
+    </section>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+    $("#layouts").addClass("active")
+    $("#host_information").addClass("active")
+    $(".create-btn").on("click", function () {
+           ui.box(
+{#               #点击后模态框标题#}
+               {"title":"添加主机",
+
+
+{#                   #点击后弹出的模态框内容为create_host.html页面内容 #}
+                "remote":"{% url "create_host" %}"
+
+               }
+
+           )
+        })
+
+</script>
+
+
+{% endblock %}

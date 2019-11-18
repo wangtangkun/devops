@@ -1,0 +1,120 @@
+{% extends "stamper.html" %}
+
+{% block css %}
+{% include "master/css.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        <div class="btn btn-sm btn-success create-btn">新增初始化</div>
+                        <div class="btn btn-sm btn-success createlog-btn">初始化主机</div>
+                    </h3>
+                    <form action="" method="get" class="pull-right">
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover text-center">
+                        <tr class="text-center">
+                            <th>序号</th>
+                            <th>名称</th>
+                            <th>初始化功能</th>
+                            <th>playbook地址</th>
+                            <th>添加用户</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        {% for i in init %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ i.name}}</td>
+                                <td>{{ i.function }}</td>
+                                <td>{{ i.play_book }}</td>
+                                <td>{{ i.create_user }}</td>
+                                <td>{{ i.create_time|date:"Y-m-d h:i:s" }}</td>
+                                <td>
+                                    <div data-url="{% url 'edit_init' i.pk %}"
+                                         class="btn btn-sm btn-success edit-btn">编辑
+                                    </div>
+                                    <div href="#" data-url="{% url 'del_init' i.pk %}" class="btn btn-sm btn-danger del-btn">删除</div>
+                                    <div href="#" data-url="{% url 'logslist' i.pk %}" class="btn btn-sm btn-info detail-btn">执行详情</div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div>
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    {{ page_html|safe }}
+                </ul>
+                <!-- /.box -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $("#bt").removeClass("hidden")
+        $("#init_list").addClass("active")
+        $("#init").addClass("active")
+        $(".create-btn").on("click", function () {
+            ui.box({
+                "title": "添加初始化",
+                "remote": "{% url 'create_init' %}"
+            })
+        })
+        $(".createlog-btn").on("click", function () {
+            ui.box({
+                "title": "初始化机器",
+                "remote": "{% url 'create_log' %}"
+            })
+        })
+        $(".detail-btn").on("click", function () {
+            ui.box({
+                "title": "初始化日志",
+                "remote": $(this).attr('data-url')
+            })
+        })
+        $(".edit-btn").on("click", function (e) {
+            e.preventDefault(); //取消原来的动作
+            ui.box({
+                "title": "编辑初始化",
+                "remote": $(this).attr('data-url')
+            })
+        })
+        $(".del-btn").on("click", function (e) {
+            e.preventDefault(); //取消原来的动作
+            var url=$(this).attr('data-url')
+            ui.confirm("你确认要删除吗?",function () {
+                console.log($(this))
+                Net.get({
+                    url:url,
+                    reload:true
+                })
+            })
+        })
+    </script>
+{% endblock %}

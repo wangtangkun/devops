@@ -1,0 +1,215 @@
+{% extends "stamper.html" %}
+{% load static %}
+
+{% block css %}
+    <style>
+        p {display: inline-block;
+            color: yellow;
+
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css' %}" type="text/css">
+
+    {% include "master/css.html" %}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">{% csrf_token %}
+         <form class="form-horizontal" id="createForm" action="" method="post">{% csrf_token %}
+            <div class="box-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分钟
+                            <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-9">
+
+                        <select class="form-control" id="minute_select" name="time">
+                            {% for foo in min %}
+                            <option value="{{ foo }}">{{ foo }}</option>
+                        {% endfor %}
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">小时
+                            <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="hour_select" name="time">
+                                {% for foo in hour %}
+                                    <option value="{{ foo }}">{{ foo }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">日
+                            <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="day_select" name="time">
+                                {% for foo in day %}
+                                    <option value="{{ foo }}">{{ foo }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">月
+                            <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="mouth_select" name="time">
+                                {% for foo in mouth %}
+                                    <option value="{{ foo }}">{{ foo }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">周
+                            <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="week_select" name="time">
+                                {% for foo in week %}
+                                    <option value="{{ foo }}">
+                                    {{ foo }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+
+                    </div>
+
+
+
+
+        {% for field in form %}
+            <div class="form-group{% if field.errors %} has-error{% endif %}">
+                <label class="col-sm-2 control-label">{{ field.label }}
+                    {% if field.field.required %}
+                        <span class="text-red">*</span>
+                    {% endif %}
+                </label>
+                <div class="col-sm-9">
+                    {{ field }}
+                </div>
+                <span class="help-block">
+                  {% for error in field.errors %}
+                      {{ error }}
+                  {% endfor %}
+                 {{ field.help_text }}
+                </span>
+            </div>
+        {% endfor %}
+
+        <div class="box-footer text-center">
+            <button type="reset" class="btn btn-warning">清空</button>
+            <button id="createBtn" type="button" value="tijiao" class="btn btn-info">提交</button>
+            <p class="text-center"><i id='iconWait'></i></p>
+        </div>
+    </div>
+</form>
+    </div>
+
+
+        <!-- /.col (left) -->
+
+
+        <div class="col-md-6">
+        <div class="bg-black-active color-palette" style="height: 480px">
+{#  此html的style定义了p标签处于一行（显示美观）, 防止全部处于一行，每相关的两个p标签用div包起来，两个p标签一行          #}
+             <div>   <p> 任务名称:</p> <p style="color: sandybrown" id="cron_name"></p> </div>
+
+            <div>   <p> 任务:</p> <p style="color: #00e765" id="cron_job"></p></div>
+             <div>   <p> 任务时间:</p> <p id="cron_time"></p>   </div>
+             <div>   <p> 备注:</p> <p id="cron_note"></p> </div>
+            </div>
+
+        </div>
+{#        <div class="text-center">#}
+{#            <button  type="reset" class="btn btn-warning">清空</button>#}
+{#            <button id="createBtn" type="button" class="btn btn-info">提交</button>#}
+{#            <p class="text-center"><i id='iconWait'></i></p>#}
+{#        </div>#}
+        <!-- /.col (right) -->
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    $("select").select2();
+    $("#bt").removeClass("hidden");
+    $("#create_cron").addClass("active");
+    $("#command").addClass("active");
+    //定义 分 时 日 月 周 变量对应的标签id（变量获取数据）
+    var minute_select = $("#minute_select");
+    var hour_select = $("#hour_select");
+    var day_select = $("#day_select");
+    var mouth_select = $("#mouth_select");
+    var week_select = $("#week_select");
+
+
+    //定义右边屏幕标签内对应的数据
+    function schedule() {
+
+           time ="<font size=3 color=aqua>"+ "" + minute_select.val() + " " + hour_select.val() + " " + day_select.val() + " " + mouth_select.val() + " " + week_select.val()+"</font>";
+            $("#cron_time").html(time);
+            $("#cron_name").text($("#id_name").val())   //id_name等下面的标签是在页面用检查，查看任务名称输入框id
+            $("#cron_job").text($("#id_job").val())
+            $("#cron_note").text($("#id_note").val())
+        }
+    //执行函数
+    schedule();
+    //当选择框和输入框发生改变时,执行schedule函数  （选择选项，实时显示在右边屏幕的标签内）
+    $("select,input").change(schedule) //change的时候函数不需要加()
+
+    //通过判断pk,定义url是新增还是编辑
+    if ("{{ pk }}"=="0"){
+                url="{% url 'create_cron' %}"
+            }else{
+
+                url="{% url 'edit_cron' pk %}"
+                //如果是编辑,以下标签(分时日月周)内容都要由之前的数据填充(后端传来的old_time)
+
+                minute_select.val({{ old_time|safe }}[0])
+                hour_select.val({{ old_time|safe }}[1])
+                day_select.val({{ old_time|safe }}[2])
+                mouth_select.val({{ old_time|safe }}[3])
+                week_select.val({{ old_time|safe }}[4])
+
+                //计划名只读状态不能修改(修改了计划名等于新建)
+                $("#id_name").attr("readonly",true)
+
+                //执行schedule函数，应用数据
+                schedule()
+            }
+
+    $("#createBtn").on("click", function () {
+            Net.post({
+                url: url,
+                data: $("#createForm").serialize(),
+                go: "{% url 'create_cron' %}",
+                btn: $("#createBtn")
+            })
+        })
+
+</script>
+
+
+{% endblock %}

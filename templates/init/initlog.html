@@ -1,0 +1,27 @@
+<div class="box-body table-responsive no-padding">
+    <table class="table table-hover text-center">
+        <tr class="text-center">
+            <th>序号</th>
+            <th>主机列表</th>
+            <th>执行时间</th>
+            <th>执行结果</th>
+            <th>执行人</th>
+        </tr>
+        {% for log in logs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+{#                如果是多对多的关系的化,则需要用all来获取所有的数据#}
+                {% for host in log.hosts_list.all %}
+                    {{ host.hostip }}
+                    {% endfor %}
+                </td>
+                <td>{{ log.create_time|date:"Y-m-d h:i:s" }}</td>
+                <td>{{ log.result }}</td>
+                <td>{{ log.user }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+

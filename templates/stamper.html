@@ -1,0 +1,923 @@
+{% load static %}
+<html lang="en" style="overflow: auto; touch-action: pan-y;">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Olive Enterprise">
+
+<style>
+     * { touch-action: pan-y; }
+</style>
+
+{#<link rel="shortcut icon" href="/static/img/favicon.ico">#}
+
+<title>
+       Olive Admin - Flat &amp; Responsive Bootstrap Admin Template
+     </title>
+
+<link href="/static/css/bootstrap-3.3.4.css" rel="stylesheet">
+<link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/bootstrap-reset.css" rel="stylesheet">
+<link href="/static/css/font-awesome.4.6.0.css" rel="stylesheet">
+<link href="/static/css/style.css" rel="stylesheet">
+<link href="/static/css/style-responsive.css" rel="stylesheet">
+<link href="/static/css/morris.css" rel="stylesheet">
+
+{#<link href="/static/AdminLTE/css/AdminLTE.min.css" rel="stylesheet">#}
+<link href="/static/css/clndr.css" rel="stylesheet">
+{#<!--[if lt IE 9]>#}
+{#<script src="/static/js/html5shiv.js">#}
+{#</script>#}
+{#<script src="/static/js/respond.min.js">#}
+{#</script>#}
+{#<![endif]-->#}
+
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;display: block;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;padding: 5px 5px 8px 5px;font: 10px arial, san serif;text-align: left;}</style>
+    {% block css %}
+    
+    {% endblock %}
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+<section id="container" class="">
+
+<header class="header white-bg">
+
+<div class="sidebar-toggle-box">
+<div data-placement="right" class="fa fa-bars tooltips" data-original-title="" title="">
+</div>
+</div>
+
+<a href="stamper.html" class="logo">
+Olive
+<span>
+Admin
+</span>
+</a>
+
+<nav class="nav notify-row" id="top_menu">
+<ul class="nav top-menu">
+
+<li class="dropdown">
+<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+<i class="fa fa-tasks">
+</i>
+<span class="badge bg-success">
+6
+</span>
+</a>
+<ul class="dropdown-menu extended tasks-bar">
+<li class="notify-arrow notify-arrow-blue">
+</li>
+<li>
+<p class="blue">
+You have 6 pending tasks
+</p>
+</li>
+<li>
+<a href="#">
+<div class="task-info">
+<div class="desc">
+Dashboard v1.3
+</div>
+<div class="percent">
+40%
+</div>
+</div>
+<div class="progress progress-striped">
+<div class="progress-bar progress-bar-success set-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+<span class="sr-only">
+40% Complete (success)
+</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="#">
+<div class="task-info">
+<div class="desc">
+Database Update
+</div>
+<div class="percent">
+60%
+</div>
+</div>
+<div class="progress progress-striped">
+<div class="progress-bar progress-bar-warning set-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+<span class="sr-only">
+60% Complete (warning)
+</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="#">
+<div class="task-info">
+<div class="desc">
+Iphone Development
+</div>
+<div class="percent">
+87%
+</div>
+</div>
+<div class="progress progress-striped">
+<div class="progress-bar progress-bar-info set-87" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+<span class="sr-only">
+87% Complete
+</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="#">
+<div class="task-info">
+<div class="desc">
+Mobile App
+</div>
+<div class="percent">
+33%
+</div>
+</div>
+<div class="progress progress-striped">
+<div class="progress-bar progress-bar-danger set-33" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+<span class="sr-only">
+33% Complete (danger)
+</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="#">
+<div class="task-info">
+<div class="desc">
+Dashboard v1.3
+</div>
+<div class="percent">
+45%
+</div>
+</div>
+<div class="progress progress-striped active">
+<div class="progress-bar set-45" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+<span class="sr-only">
+45% Complete
+</span>
+</div>
+</div>
+</a>
+</li>
+<li class="external">
+<a href="#">
+See All Tasks
+</a>
+</li>
+</ul>
+</li>
+
+
+<li id="header_inbox_bar" class="dropdown">
+<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+<i class="fa fa-envelope-o">
+</i>
+<span class="badge bg-important">
+5
+</span>
+</a>
+<ul class="dropdown-menu extended inbox">
+<li class="notify-arrow notify-arrow-blue">
+</li>
+<li>
+<p class="blue">
+You have 5 new messages
+</p>
+</li>
+<li>
+<a href="#">
+<span class="photo">
+<img alt="avatar" src="/static/img/avatar-mini.jpg">
+</span>
+<span class="subject">
+<span class="from">
+Chintan Pandya
+</span>
+<span class="time">
+Just now
+</span>
+</span>
+<span class="message">
+Hello, this is an example msg.
+</span>
+</a>
+ </li>
+<li>
+<a href="#">
+<span class="photo">
+<img alt="avatar" src="/static/img/avatar-mini2.jpg">
+</span>
+<span class="subject">
+<span class="from">
+Parth Jani
+</span>
+<span class="time">
+10 mins
+</span>
+</span>
+<span class="message">
+Hi, Bro how are you ?
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+<span class="photo">
+<img alt="avatar" src="/static/img/avatar-mini3.jpg">
+</span>
+<span class="subject">
+<span class="from">
+Jay Bardolia
+</span>
+<span class="time">
+3 hrs
+</span>
+</span>
+<span class="message">
+This is awesome dashboard.
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+<span class="photo">
+<img alt="avatar" src="/static/img/avatar-mini4.jpg">
+</span>
+<span class="subject">
+<span class="from">
+Pruthvi Bardolia
+</span>
+<span class="time">
+Just now
+</span>
+</span>
+<span class="message">
+Hello, this is metrolab
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+See all messages
+</a>
+</li>
+</ul>
+</li>
+
+
+<li id="header_notification_bar" class="dropdown">
+<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+<i class="fa fa-bell-o">
+</i>
+<span class="badge bg-warning">
+7
+</span>
+</a>
+<ul class="dropdown-menu extended notification">
+<li class="notify-arrow notify-arrow-blue">
+</li>
+<li>
+<p class="blue">
+You have 7 new notifications
+</p>
+</li>
+<li>
+<a href="#">
+<span class="label label-danger">
+<i class="fa fa-bolt">
+</i>
+</span>
+Server #3 overloaded.
+<span class="small italic">
+34 mins
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+<span class="label label-warning">
+<i class="fa fa-bell">
+</i>
+</span>
+Server #10 not respoding.
+<span class="small italic">
+1 Hours
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+<span class="label label-danger">
+<i class="fa fa-bolt">
+</i>
+</span>
+Database overloaded 24%.
+<span class="small italic">
+4 hrs
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+<span class="label label-success">
+<i class="fa fa-plus">
+</i>
+</span>
+New user registered.
+<span class="small italic">
+Just now
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+<span class="label label-primary">
+<i class="fa fa-bullhorn">
+</i>
+</span>
+Application error.
+<span class="small italic">
+10 mins
+</span>
+</a>
+</li>
+<li>
+<a href="#">
+See all notifications
+</a>
+</li>
+</ul>
+</li>
+
+</ul>
+</nav>
+
+
+<div class="top-nav ">
+<ul class="nav pull-right top-menu">
+<li>
+<input type="text"  class="form-control search" placeholder="搜索">
+</li>
+<li class="dropdown">
+<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+<img alt="" src="/static/img/avatar1_small.jpg">
+<span class="username">
+{{ request.session.user.name }}
+</span>
+<b class="caret">
+</b>
+</a>
+<ul class="dropdown-menu extended logout">
+<li class="log-arrow-up">
+</li>
+<li>
+<a href="#">
+<i class=" fa fa-suitcase">
+</i>
+Profile
+</a>
+</li>
+<li>
+<a href="#">
+<i class="fa fa-cog">
+</i>
+Settings
+</a>
+</li>
+<li>
+<a href="#">
+<i class="fa fa-bell-o">
+</i>
+Notification
+</a>
+</li>
+<li>
+<a href="login.html">
+<i class="fa fa-key">
+</i>
+Log Out
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</header>
+
+
+<aside>
+<div id="sidebar" class="nav-collapse" tabindex="5000" style="overflow: hidden; outline: none; margin-left: 0px;">
+<ul class="sidebar-menu" id="nav-accordion" style="display: block;">
+<li>
+<a href={% url "index" %} class="">
+<i class="fa fa-dashboard">
+</i>
+<span>
+Dashboard
+</span>
+</a>
+</li>
+<li  class="sub-menu dcjq-parent-li">
+<a id="host" href="javascript:;" class="dcjq-parent">
+<i class="fa fa-laptop">
+</i>
+<span>
+主机管理
+</span>
+<span class="label label-success span-sidebar">
+4
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="overflow: hidden; display: none;">
+<li id="host_information">
+<a href={% url "hostlist" %}>
+主机信息
+</a>
+</li>
+<li>
+<a href="horizontal_menu.html">
+Horizontal Menubar
+</a>
+</li>
+<li>
+<a href="language_switch_bar.html">
+Language Bar
+</a>
+</li>
+<li>
+<a href="email_template.html" target="_blank">
+Email Templates
+</a>
+</li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a id="user" href="javascript:;" class="dcjq-parent">
+<i class="glyphicon glyphicon-user">
+</i>
+<span>
+用户管理
+</span>
+<span class="label label-info span-sidebar">
+7
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="overflow: hidden; display: none;">
+<li id="user_list">
+<a href={% url "userlist" %}>
+用户列表
+</a>
+</li>
+<li>
+<a href="buttons.html">
+Buttons
+</a>
+</li>
+<li>
+<a href="widget.html">
+Widget
+</a>
+</li>
+<li>
+<a href="slider.html">
+Range Slider
+</a>
+</li>
+<li>
+<a href="nestable.html">
+Nestable List
+</a>
+</li>
+<li>
+<a href="tree.html">
+Tree View List
+</a>
+</li>
+<li>
+<a href="font_awesome.html">
+Font Awesome Icon
+</a>
+</li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a id="init" href="javascript:;" class="dcjq-parent">
+<i class="fa fa-cogs">
+</i>
+<span>
+初始化管理
+</span>
+<span class="label label-primary span-sidebar">
+5
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li id="init_list">
+<a href="{% url "initlist" %}">
+初始化列表
+</a>
+</li>
+<li>
+<a href="calendar.html">
+Calendar
+</a>
+</li>
+<li>
+<a href="gallery.html">
+Gallery
+</a>
+</li>
+<li>
+<a href="todo_list.html">
+Todo List
+</a>
+</li>
+<li>
+<a href="draggable_portlet.html">
+Draggable Portlets
+</a>
+</li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a id="project" href="javascript:;" class="dcjq-parent">
+<i class="fa fa-tasks">
+</i>
+<span>
+项目管理
+</span>
+<span class="label label-info span-sidebar">
+7
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li id="project_list">
+<a href="{% url "project_list" %}">
+项目列表
+</a>
+</li>
+<li>
+<a href="advanced_form_components.html">
+Advanced Components
+</a>
+</li>
+<li>
+<a href="form_wizard.html">
+Form Wizards
+</a>
+</li>
+<li>
+<a href="form_validation.html">
+Form Validation
+</a>
+</li>
+<li>
+<a href="dropzone.html">
+Dropzone File Upload
+</a>
+</li>
+<li>
+<a href="inline_editor.html">
+Inline Editor
+</a>
+</li>
+<li>
+<a  href="file_upload.html">
+
+</a>
+</li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a id="command" href="javascript:;" class="dcjq-parent">
+<i class="fa fa-sitemap">
+</i>
+<span>
+命令管理
+</span>
+<span class="label label-inverse span-sidebar">
+5
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li id="command_issued">
+<a  href="{% url "command_issued" %}">
+命令下发
+</a>
+</li>
+<li id="command_list">
+<a href="{% url "command_list" %}">
+命令下发历史
+</a>
+</li>
+<li id="create_cron">
+<a href="{% url "create_cron" %}">
+创建定时任务
+</a>
+</li>
+<li id="cron_list">
+<a href="{% url "cron_list" %}">
+定时任务列表
+</a>
+</li>
+<li>
+<a href="editable_table.html">
+Editable Table
+</a>
+</li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="javascript:;" class="dcjq-parent">
+<i class=" fa fa-envelope">
+</i>
+<span>
+Mail
+</span>
+<span class="label label-danger span-sidebar">
+2
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="inbox.html">
+Inbox
+</a>
+</li>
+<li>
+<a href="inbox_details.html">
+Mail Details
+</a>
+</li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="javascript:;" class="dcjq-parent">
+<i class=" fa fa-bar-chart-o">
+</i>
+<span>
+Charts
+</span>
+<span class="label label-warning span-sidebar">
+4
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="morris.html">
+Morris Chart
+</a>
+</li>
+<li>
+<a href="chartjs.html">
+Chartjs Chart
+</a>
+</li>
+<li>
+<a href="flot_chart.html">
+Flot Charts
+</a>
+</li>
+<li>
+<a href="xchart.html">
+xChart
+</a>
+ </li>
+</ul>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="javascript:;" class="dcjq-parent">
+<i class="fa fa-shopping-cart">
+</i>
+<span>
+Product
+</span>
+<span class="label label-success span-sidebar">
+2
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="product_list.html">
+List View
+</a>
+</li>
+<li>
+<a href="product_details.html">
+Details View
+</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="google_maps.html">
+<i class="fa fa-map-marker">
+</i>
+<span>
+Google Maps
+</span>
+</a>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="javascript:;" class="dcjq-parent">
+<i class="fa fa-glass">
+</i>
+<span>
+Extra Pages
+</span>
+<span class="label label-primary span-sidebar">
+10
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="blank.html">
+Blank Page
+</a>
+</li>
+<li>
+<a href="lock_screen.html">
+Lock Screen
+</a>
+</li>
+<li>
+<a href="profile.html">
+Profile
+</a>
+</li>
+<li>
+<a href="invoice.html">
+Invoice
+</a>
+</li>
+<li>
+<a href="search_result.html">
+Search Result
+</a>
+</li>
+<li>
+<a href="pricing_table.html">
+Pricing Table
+</a>
+</li>
+<li>
+<a href="faq.html">
+FAQ
+</a>
+</li>
+<li class="active">
+<a href="fb_wall.html">
+Timeline
+</a>
+</li>
+<li>
+<a href="404.html">
+404 Error
+</a>
+</li>
+<li>
+<a href="500.html">
+500 Error
+</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="login.html">
+<i class="fa fa-user">
+</i>
+<span>
+Login Page
+</span>
+</a>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="javascript:;" class="dcjq-parent">
+<i class="fa fa-th">
+</i>
+<span>
+Multi level Menu
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="javascript:;">
+Menu Item 1
+</a>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="boxed_page.html" class="dcjq-parent">
+Menu Item 2
+<span class="label label-primary">
+1
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="javascript:;">
+Item 2.1
+</a>
+</li>
+<li class="sub-menu dcjq-parent-li">
+<a href="javascript:;" class="dcjq-parent">
+Menu Item 3
+<span class="label label-primary">
+3
+</span>
+<span class="dcjq-icon"></span></a>
+<ul class="sub" style="display: none; overflow: hidden;">
+<li>
+<a href="javascript:;">
+Item 3.1
+</a>
+</li>
+<li>
+<a href="javascript:;">
+Item 3.2
+</a>
+</li>
+<li>
+<a href="javascript:;">
+Item 3.2
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
+
+
+<section id="main-content" style="margin-left: 210px;">
+
+
+
+
+
+<section class="wrapper">
+
+<section id="bt" class="content-header hidden">
+      <h1>
+        {{ page_title }}
+
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url "index" %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">{{ page_title }}</li>
+      </ol>
+    </section>
+{% block content %} {% endblock %}
+
+</section>
+
+
+</section>
+
+
+
+    
+
+</section>
+
+{% load static %}
+{#<script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>#}
+{#<script src="/static/js/jquery-1.8.3.min.js"></script>#}
+
+{#{% include "master/js.html" %}#}
+{#{% include "master/css.html" %}#}
+{% include "master/js.html" %}
+{% block js %}
+
+{% endblock %}
+
+
+
+
+<div id="qb-sougou-search" style="display: none; opacity: 0;"><p>搜索</p><p class="last-btn">复制</p><iframe src=""></iframe></div></body></html>

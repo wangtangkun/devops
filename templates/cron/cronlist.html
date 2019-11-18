@@ -1,0 +1,97 @@
+{% extends 'stamper.html' %}
+{% block css %}
+{% include "master/css.html" %}
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        <a href="{% url 'create_cron' %}" class="btn btn-sm btn-success create-btn">新增计划任务</a>
+                    </h3>
+                    <form action="" method="get" class="pull-right">
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover text-center">
+                        <tr class="text-center">
+                            <th>序号</th>
+                            <th>名称</th>
+                            <th>时间</th>
+                            <th>任务</th>
+                            <th>机器</th>
+                            <th>执行用户</th>
+                            <th>操作</th>
+                        </tr>
+                        {% for cron in crons %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ cron.name }}</td>
+                                <td>{{ cron.time }}</td>
+                                <td>{{ cron.job }}</td>
+                                <td>
+                                {% for foo in cron.hosts_list.all %}
+                                {{ foo.hostip }}
+                                {% endfor %}
+
+                                </td>
+                                <td>{{ cron.user }}</td>
+                                <td>
+                                    <a href="{% url 'edit_cron' cron.pk %}"
+                                         class="btn btn-sm btn-success edit-btn">编辑
+                                    </a>
+                                    <div href="#" data-url="{% url 'del_cron' cron.pk %}" class="btn btn-sm btn-danger del-btn">删除</div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div>
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    {{ page_html|safe }}
+                </ul>
+                <!-- /.box -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $("#bt").removeClass("hidden")
+        $("#cron_list").addClass("active")
+        $("#command").addClass("active")
+        $(".del-btn").on("click", function (e) {
+            e.preventDefault(); //取消原来的动作
+            var url=$(this).attr('data-url')
+            console.log(this);
+            ui.confirm("你确认要删除吗?",function () {
+                console.log($(this))
+                Net.get({
+                    url:url,
+                    reload:true
+                })
+            })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,25 @@
+这是添加用户页面
+
+<div class="btn btn-sm btn-success create-btn">确认</div>
+<button class="btn btn-sm btn-danger" type="reset">清空</button>
+<input placeholder="用户名" type="text" id="user">  <span id="msg"></span>
+<p class="wait"></p>
+<script>
+    $(".create-btn").on("click",function () {
+{#        应用js文件内的Net.post方法   下面字典内的都通过js指定好的方法来执行，具体查看js文件#}
+        Net.post({
+
+{#数据#}
+            "data":{
+
+                "username":user
+            },
+            "url":"{% url 'useradd' %}",
+{#   如果btn存在,在ajax发送前是不可点的状态         #}
+            "btn":$(".create-btn"),
+{#   跳转到哪个页面         #}
+            "go":"{% url 'host' %}"
+        })
+    })
+
+</script>

@@ -1,0 +1,238 @@
+{% extends "stamper.html" %}
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css' %}" type="text/css">
+
+    {% include "master/css.html" %}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">{% csrf_token %}
+         <div class="zTreeDemoBackground left">
+{#    style:固定高度400px， 如果超出则隐藏并通过滚轮显示剩余部分#}
+             <ul id="treeDemo" class="ztree" style="height: 400px;overflow: auto"></ul>
+             <div>
+{#     textarea 输入框 ，与input比更大更自由               #}
+            <textarea class="form-control" id="command_text" style="height: 80px">
+            </textarea>
+
+                </div>
+            </div>
+        <div class="text-right">
+             <button id="createBtn" type="button" class="btn btn-info">提交</button>
+        </div>
+    </div>
+        <!-- /.col (left) -->
+
+
+        <div class="col-md-6">
+        <div class="bg-black-active color-palette" style="height: 480px">
+                当前选中<span id="checkCount" class="highlight_red"></span>台机器
+                <p> 结果展示:</p>
+{#     pre与text区别，pre可以通过\n换行           #}
+                <pre id="res_command" style="background-color: black;"></pre>
+            </div>
+
+        </div>
+{#        <div class="text-center">#}
+{#            <button  type="reset" class="btn btn-warning">清空</button>#}
+{#            <button id="createBtn" type="button" class="btn btn-info">提交</button>#}
+{#            <p class="text-center"><i id='iconWait'></i></p>#}
+{#        </div>#}
+        <!-- /.col (right) -->
+</div>
+{% endblock %}
+
+{% block js %}
+{#    <script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'plugins/zTree_v3/js/jquery.ztree.core.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/zTree_v3/js/jquery.ztree.excheck.js' %}"></script>
+
+    <SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			view: {
+				selectedMulti: false
+			},
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onCheck: onCheck
+			}
+		};
+
+
+
+		var clearFlag = false;
+		function onCheck(e, treeId, treeNode) {
+			count();
+			if (clearFlag) {
+				clearCheckedOldNodes();
+			}
+		}
+		function clearCheckedOldNodes() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			nodes = zTree.getChangeCheckedNodes();
+			for (var i=0, l=nodes.length; i<l; i++) {
+				nodes[i].checkedOld = nodes[i].checked;
+			}
+		}
+		function count() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                checkCount = zTree.getCheckedNodes(true).length;
+{#                 checkCount:选中节点数量  nocheckCount:未选中节点数量  changeCount:当前被修改勾选状态的节点。#}
+                {#            判断选中多少个节点，如果当前为0则数量为checkCount,如果不为0，则等于checkCount-1   -1（父标签不能算作一个节点）          #}
+                if(checkCount==0){
+                $("#checkCount").text(checkCount);
+                }else{
+                    $("#checkCount").text(checkCount-1);
+                }
+            {#			nocheckCount = zTree.getCheckedNodes(false).length,#}
+            {#			changeCount = zTree.getChangeCheckedNodes().length;#}
+            {#			$("#nocheckCount").text(nocheckCount);#}
+            {#			$("#changeCount").text(changeCount);#}
+        }
+
+
+
+		function createTree() {
+			$.fn.zTree.init($("#treeDemo"), setting, {{ ips|safe }} );
+			count();
+			clearFlag = $("#last").attr("checked");
+		}
+
+		$(document).ready(function(){
+			createTree();
+			$("#init").bind("change", createTree);
+			$("#last").bind("change", createTree);
+		});
+		//-->
+{#               $("#command").addClass("active");#}
+
+
+{#  点击提交按钮，触发下面的代码      #}
+    $("#createBtn").on("click",function () {
+
+         var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                nodes = zTree.getChangeCheckedNodes(), //根据上面代码 nodes:勾选的数据
+
+             command=$("#command_text").val();  //获取输入框的内容（输入的命令）
+
+
+         if (nodes.length ==0){  //如果勾选长度为0（没有勾选节点）
+             alert("请选择机器");  //提示
+             return;
+         };
+         if (command.replace(/\s/g,"")==""){    // replace去除空格,如果command为空（没有输入命令）
+             alert("请输入命令"); // 提示
+             return;
+         };
+         node_ips=[];  // 列表（用来存放hostip）
+         nodes.forEach(function (node) {   //循环nodes（上面说过 nodes:勾选的数据）
+             if (node.pId){      //如果存在pId （标签pId为0，如果存在pId说明是需要取到的节点对象）
+             node_ips.push(node.name)}  // 将name（主机ip）追加到node_ips列表
+         })
+         $.post({    //提交数据
+             url:"{% url "command_issued" %}",  // 提交到的页面
+             data:{    //数据  字典格式
+                 node_ips:node_ips,  //node_ips:主机ip
+                 command:command,    //command:输入的命令
+                 // 上面两个是后端需要的数据,后端获取到ip和要执行的命令后,再进行操作
+                 csrfmiddlewaretoken:$("[name=csrfmiddlewaretoken]").val()  //通过校验
+             },
+             beforeSend:function(){ //ajax发送之前做的操作
+				  $("#createBtn").attr('disabled','disabled'); //不可
+				  $("#iconWait").addClass("fa fa-spinner fa-spin") //等待
+		   },
+		   complete:function(){  //发送完成
+				   $("#createBtn").attr('disabled',null);
+				  $("#iconWait").removeClass("fa fa-spinner fa-spin")
+           },
+
+             //获取后台返回的数据:res
+             success:function (res) {
+                msg=res.msg;  //获取命令结果.  msg:命令结果  status:状态
+                console.log(res);
+
+
+                res=""  //定义一个空res,用来存放数据
+
+             //msg数据格式:
+                 //{"ok":"" ,"skipped":"","failed":"","unrachable":""}
+
+             //任务执行成功,下面定义数据及数据字体样式
+                 if(Object.values(msg.ok).length!=0){
+                     data_ok=msg.ok
+                     //循环数据     k:key 主机ip     v:value  数据字典  v.command.stdout 执行结果
+                     $.each(data_ok,function (k,v) {
+                     //应用说明:
+                         //  body：
+                                // <p> 结果展示:</p>
+                                //<pre id="res_command"></pre>  //pre与text区别，pre可以通过\n换行
+                         // js：
+                                //$("#res_command").html(res)  res_command标签应用res,将数据与样式展示在网页上
+                         // 定义res的数据和样式。  font 设置字体颜色
+                        res=res+"<font size=3 color=green>"+k+"| CHANGED | rc=0 >>"+"</font>"+"\n";
+                        res=res+"<font size=2 color=yellow>"+v.command.stdout+"</font>"+"\n";
+
+//res = 任务报错的信息 说明:如果一次性输入多个命令，有的错误，有的正确，所有这里要加上命令错误的信息
+                         res=res+"<font size=2 color=red>"+v.command.stderr+"</font>"+"\n"
+                     })
+                 }
+
+
+             //任务跳过
+                 if(Object.values(msg.skipped).length!=0){
+                     data_skipped=msg.skipped
+                     $.each(data_skipped,function (k,v) {
+                         //res =任务执行后的信息
+                        res=res+"<font size=3 color=green>"+k+"| SUCCESS | rc=0 >>"+"</font>"+"\n";
+                        res=res+"<font size=2 color=yellow>"+v.command.stdout+"</font>"+"\n"
+                     })
+                 }
+
+
+             //命令出错    v.command.stderr 命令错误信息
+                 if(Object.values(msg.failed).length!=0){
+                     data_failed=msg.failed
+                     $.each(data_failed,function (k,v) {
+                         //res=命令错误信息
+                         res=res+"<font size=3 color=red>"+k+"| FAILED | rc=127 >>"+"</font>"+"\n";
+                        res=res+"<font size=2 color=red>"+v.command.stderr+"</font>"+"\n";
+
+                        //res=命令正确信息   说明:如果一次性输入多个命令，有的错误，有的正确，所有这里要加上命令正确的信息
+                         res=res+"<font color=yellow>"+v.command.stdout+"</font>"+"\n"
+                     })
+                 }
+
+
+             //主机不可达    v.command.msg 主机不可达报错信息
+                 if(Object.values(msg.unreachable).length!=0){
+                     data_unreachable=msg.unreachable
+                     $.each(data_unreachable,function (k,v) {
+                        res=res+"<font size=3 color=red>"+k+"| FAILED | rc=127 >>"+"</font>"+"\n";
+                        res=res+"<font size=2 color=red>"+v.command.msg+"</font>"+"\n"
+                     })
+                 }
+                $("#res_command").html(res)   //应用上面的res数据及样式, .html 可以识别font样式
+             }
+         })
+
+    })
+	</SCRIPT>
+    <script>
+    $("#bt").removeClass("hidden")  //移除导航的不可见效果（显示导航）
+    $("#command").addClass("active") // 菜单展开
+    $("#command_issued").addClass("active")  // 菜单展开
+    </script>
+{% endblock %}
